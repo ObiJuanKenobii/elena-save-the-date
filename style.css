@@ -5,6 +5,7 @@
     --ink-dark: #2C1E11;
     --ink-muted: #5C4533;
     --burgundy: #7D0C0C;
+    --emerald-ink: #0B4E26;
     --gold: #D29A15;
     --gold-glow: rgba(210, 154, 21, 0.4);
     --border-radius: 20px;
@@ -284,12 +285,78 @@ body {
     transform: rotate(-10deg);
 }
 
+/* Hogwarts Crest Header */
+.hogwarts-crest {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.crest-shield {
+    width: 60px;
+    height: 70px;
+    position: relative;
+    border: 3px solid var(--gold);
+    border-radius: 8px 8px 30px 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background-color: var(--parchment);
+}
+
+.crest-shield .house {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.8rem;
+    font-weight: 900;
+    color: #fff;
+}
+
+.h-g { background-color: #7D0C0C; } /* Gryffindor Crimson */
+.h-s { background-color: #0B4E26; } /* Slytherin Green */
+.h-r { background-color: #1A3B66; } /* Ravenclaw Blue */
+.h-h { background-color: #E6A100; color: #2C1E11 !important; } /* Hufflepuff Gold */
+
+.crest-center {
+    position: absolute;
+    top: calc(50% - 14px);
+    left: calc(50% - 14px);
+    width: 28px;
+    height: 28px;
+    background-color: var(--parchment);
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: var(--emerald-ink);
+}
+
+.school-motto {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--emerald-ink);
+    margin-top: 8px;
+    opacity: 0.85;
+}
+
 /* Acceptance Letter Details */
 .owl-post {
     font-family: 'Cinzel Decorative', serif;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    color: var(--burgundy);
+    color: var(--emerald-ink);
     letter-spacing: 3px;
     margin-bottom: 12px;
 }
@@ -756,4 +823,31 @@ body {
     .rsvp-buttons {
         flex-direction: column;
     }
+}
+
+/* Marauder's Map Footsteps Animation */
+.footprints-track {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+    opacity: 0.5;
+}
+
+.footstep {
+    font-size: 1.1rem;
+    color: var(--ink-muted);
+    animation: footstepWalk 4s infinite ease-in-out;
+}
+
+.step-1 { animation-delay: 0s; transform: rotate(15deg); }
+.step-2 { animation-delay: 1s; transform: rotate(-15deg); }
+.step-3 { animation-delay: 2s; transform: rotate(15deg); }
+.step-4 { animation-delay: 3s; transform: rotate(-15deg); }
+
+@keyframes footstepWalk {
+    0%, 100% { opacity: 0.15; transform: translateY(0) scale(0.9); }
+    25% { opacity: 0.85; transform: translateY(-4px) scale(1.15); color: var(--emerald-ink); }
+    50% { opacity: 0.3; transform: translateY(0) scale(1); }
 }
