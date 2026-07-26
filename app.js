@@ -1,5 +1,5 @@
-// Target Date: October 11, 2026 at 2:00 PM (14:00)
-const TARGET_DATE = new Date('October 11, 2026 14:00:00').getTime();
+// Target Date: October 10, 2026 at 2:00 PM (14:00)
+const TARGET_DATE = new Date('October 10, 2026 14:00:00').getTime();
 
 // Countdown Timer logic
 function updateCountdown() {
@@ -129,7 +129,7 @@ const TRANSLATIONS = {
         minutes: "Mins",
         seconds: "Secs",
         feast_title: "The Feast",
-        feast_date: "Sunday, October 11, 2026",
+        feast_date: "Saturday, October 10, 2026",
         feast_time: "At 2 O'clock in the afternoon",
         hall_title: "The Great Hall",
         hall_loc: "Waukegan, Illinois",
@@ -217,8 +217,8 @@ document.getElementById('calendar-btn').addEventListener('click', () => {
             ? "We are pleased to inform you that you have been invited to celebrate a magical first year of life. Dust off your spellbooks and prepare your wands!"
             : "Nos complace informarle que ha sido invitado a celebrar un año mágico de vida. ¡Despolve sus libros de hechizos y prepare sus varitas!",
         location: currentLang === 'en' ? "Waukegan, IL (Platform 9 3/4)" : "Waukegan, IL (Plataforma 9 3/4)",
-        startDate: "20261011T140000",
-        endDate: "20261011T170000"
+        startDate: "20261010T140000",
+        endDate: "20261010T170000"
     };
 
     const icsContent = [
