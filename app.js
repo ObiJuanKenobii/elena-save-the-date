@@ -131,9 +131,9 @@ const TRANSLATIONS = {
         feast_title: "The Feast",
         feast_date: "Saturday, October 10, 2026",
         feast_time: "At 2 O'clock in the afternoon",
-        hall_title: "The Great Hall",
-        hall_loc: "Waukegan, Illinois",
-        hall_details: "Platform 9 ¾ (Venue details to follow)",
+        hall_title: "Location",
+        hall_loc: "2530 W Atlantic Ave",
+        hall_details: "Waukegan, IL 60085",
         accio_calendar: "Accio Calendar",
         marauders_map: "Marauder's Map",
         rsvp_title: "Attending the Feast?",
@@ -159,9 +159,9 @@ const TRANSLATIONS = {
         feast_title: "El Banquete",
         feast_date: "Sabado, 10 de Octubre de 2026",
         feast_time: "A las 2 en punto de la tarde",
-        hall_title: "El Gran Comedor",
-        hall_loc: "Waukegan, Illinois",
-        hall_details: "Plataforma 9 ¾ (Detalles del lugar a seguir)",
+        hall_title: "Ubicación",
+        hall_loc: "2530 W Atlantic Ave",
+        hall_details: "Waukegan, IL 60085",
         accio_calendar: "Accio Calendario",
         marauders_map: "Mapa del Merodeador",
         rsvp_title: "¿Asistirá al Banquete?",
@@ -216,7 +216,7 @@ document.getElementById('calendar-btn').addEventListener('click', () => {
         description: currentLang === 'en' 
             ? "We are pleased to inform you that you have been invited to celebrate a magical first year of life. Dust off your spellbooks and prepare your wands!"
             : "Nos complace informarle que ha sido invitado a celebrar un año mágico de vida. ¡Despolve sus libros de hechizos y prepare sus varitas!",
-        location: currentLang === 'en' ? "Waukegan, IL (Platform 9 3/4)" : "Waukegan, IL (Plataforma 9 3/4)",
+        location: "2530 W Atlantic Ave, Waukegan, IL 60085",
         startDate: "20261010T140000",
         endDate: "20261010T170000"
     };
