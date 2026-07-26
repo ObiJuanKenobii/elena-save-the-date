@@ -85,6 +85,50 @@ class ConfettiParticle {
     }
 }
 
+class WandSparkParticle {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 4 + 2;
+        this.speedX = Math.random() * 2 - 1;
+        this.speedY = Math.random() * 2 - 1;
+        this.gravity = 0.05;
+        this.color = ['#FFE885', '#D29A15', '#FAF0D7', '#ffbb00'][Math.floor(Math.random() * 4)];
+        this.opacity = 1;
+    }
+
+    update() {
+        this.speedY += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.opacity -= 0.025;
+    }
+
+    draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.globalAlpha = Math.max(this.opacity, 0);
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+// Mouse Wand Spark Trail Listener
+let lastMouseTime = 0;
+window.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - lastMouseTime > 40) {
+        lastMouseTime = now;
+        particles.push(new WandSparkParticle(e.clientX, e.clientY));
+        if (!animationId) {
+            animateConfetti();
+        }
+    }
+});
+
 function startConfetti() {
     const startX = canvas.width / 2;
     const startY = canvas.height * 0.7;
@@ -113,6 +157,87 @@ function animateConfetti() {
         cancelAnimationFrame(animationId);
         animationId = null;
     }
+}
+
+// ----------------------------------------------------
+// Magical Sound Synthesizer (Web Audio API)
+// ----------------------------------------------------
+let audioCtx = null;
+let isAudioPlaying = false;
+let audioLoopTimeout = null;
+
+const audioToggleBtn = document.getElementById('audio-toggle');
+const audioIcon = document.getElementById('audio-icon');
+
+// Whimsical HP-style celesta melody frequencies (Hz)
+const MELODY = [
+    { note: 493.88, duration: 0.4 }, // B4
+    { note: 659.25, duration: 0.6 }, // E5
+    { note: 783.99, duration: 0.3 }, // G5
+    { note: 739.99, duration: 0.3 }, // F#5
+    { note: 659.25, duration: 0.5 }, // E5
+    { note: 987.77, duration: 0.7 }, // B5
+    { note: 880.00, duration: 0.8 }, // A5
+    { note: 739.99, duration: 0.8 }, // F#5
+];
+
+function playCelestaNote(freq, duration) {
+    if (!audioCtx || !isAudioPlaying) return;
+
+    try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+    } catch (e) {
+        console.error("Audio error", e);
+    }
+}
+
+function startMelodyLoop(noteIndex = 0) {
+    if (!isAudioPlaying) return;
+
+    const noteInfo = MELODY[noteIndex % MELODY.length];
+    playCelestaNote(noteInfo.note, noteInfo.duration);
+
+    const nextIndex = noteIndex + 1;
+    const delay = noteInfo.duration * 1000 + 150;
+    audioLoopTimeout = setTimeout(() => startMelodyLoop(nextIndex), delay);
+}
+
+if (audioToggleBtn) {
+    audioToggleBtn.addEventListener('click', () => {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+
+        isAudioPlaying = !isAudioPlaying;
+
+        if (isAudioPlaying) {
+            audioToggleBtn.classList.add('playing');
+            audioIcon.className = 'fa-solid fa-volume-high';
+            startMelodyLoop(0);
+        } else {
+            audioToggleBtn.classList.remove('playing');
+            audioIcon.className = 'fa-solid fa-volume-xmark';
+            if (audioLoopTimeout) clearTimeout(audioLoopTimeout);
+        }
+    });
 }
 
 // ----------------------------------------------------

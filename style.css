@@ -136,6 +136,43 @@ body {
     position: relative;
 }
 
+/* Audio Toggle styling */
+.audio-toggle-btn {
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--ink-muted);
+    transition: var(--transition);
+    z-index: 15;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(92, 69, 51, 0.06);
+}
+
+.audio-toggle-btn:hover {
+    color: var(--burgundy);
+    background-color: rgba(125, 12, 12, 0.1);
+    transform: scale(1.1);
+}
+
+.audio-toggle-btn.playing {
+    color: var(--burgundy);
+    animation: pulseAudio 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes pulseAudio {
+    0% { transform: scale(1); filter: drop-shadow(0 0 1px var(--gold)); }
+    100% { transform: scale(1.15); filter: drop-shadow(0 0 4px var(--gold)); }
+}
+
 /* Language Toggle styling */
 .lang-toggle {
     position: absolute;
