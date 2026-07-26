@@ -136,6 +136,12 @@ const TRANSLATIONS = {
         hall_details: "Waukegan, IL 60085",
         accio_calendar: "Accio Calendar",
         marauders_map: "Marauder's Map",
+        gringotts_title: "Gringotts Education Vault",
+        gringotts_text: "If you wish to honor Elena with a gift to help her save for future tuition (college/Hogwarts!), please consider contributing directly to her 529 fund:",
+        gringotts_visit: "Visit",
+        gringotts_enter: "and enter code:",
+        copy_code: "Copy",
+        copied: "Copied! 🪄",
         rsvp_title: "Attending the Feast?",
         rsvp_subtitle: "Reply by owl post! (Enter your name and confirm your attendance below.)",
         rsvp_placeholder: "Wizard / Witch Name(s)",
@@ -164,6 +170,12 @@ const TRANSLATIONS = {
         hall_details: "Waukegan, IL 60085",
         accio_calendar: "Accio Calendario",
         marauders_map: "Mapa del Merodeador",
+        gringotts_title: "Bóveda de Gringotts",
+        gringotts_text: "Si desea honrar a Elena con un regalo para ayudarla a ahorrar para su futura educación (¡universidad/Hogwarts!), considere contribuir directamente a su fondo 529:",
+        gringotts_visit: "Visite",
+        gringotts_enter: "e ingrese el código:",
+        copy_code: "Copiar",
+        copied: "¡Copiado! 🪄",
         rsvp_title: "¿Asistirá al Banquete?",
         rsvp_subtitle: "¡Responda por correo de lechuza! (Ingrese su nombre y confirme su asistencia a continuación.)",
         rsvp_placeholder: "Nombre(s) de Mago / Bruja",
@@ -354,4 +366,24 @@ function showRsvpFeedback(isYes) {
         yesBtn.classList.remove('hidden');
     }
     feedbackContainer.classList.remove('hidden');
+}
+
+// ----------------------------------------------------
+// Copy 529 Code to Clipboard
+// ----------------------------------------------------
+const copyBtn = document.getElementById('copy-code-btn');
+if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+        const codeText = document.getElementById('vault-code').innerText;
+        navigator.clipboard.writeText(codeText).then(() => {
+            const span = copyBtn.querySelector('[data-translate]');
+            copyBtn.classList.add('copied');
+            if (span) span.innerText = currentLang === 'en' ? 'Copied! 🪄' : '¡Copiado! 🪄';
+            
+            setTimeout(() => {
+                copyBtn.classList.remove('copied');
+                if (span) span.innerText = TRANSLATIONS[currentLang]['copy_code'];
+            }, 2500);
+        });
+    });
 }

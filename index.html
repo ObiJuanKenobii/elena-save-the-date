@@ -28,6 +28,12 @@
     <div class="container">
         <!-- Parchment Card -->
         <main class="card parchment">
+            <!-- Ornate Corner Ornaments -->
+            <div class="corner-ornament top-left"></div>
+            <div class="corner-ornament top-right"></div>
+            <div class="corner-ornament bottom-left"></div>
+            <div class="corner-ornament bottom-right"></div>
+
             <!-- Language Toggle -->
             <div class="lang-toggle">
                 <button id="lang-en" class="lang-btn active">EN</button>
@@ -114,8 +120,13 @@
                     If you wish to honor Elena with a gift to help her save for future tuition (college/Hogwarts!), please consider contributing directly to her 529 fund:
                 </p>
                 <div class="gringotts-info">
-                    <p>Visit <a href="https://www.ugift529.com/" target="_blank" class="ugift-link">Ugift529.com</a> and enter code:</p>
-                    <div class="vault-code">B9M-57B</div>
+                    <p><span data-translate="gringotts_visit">Visit</span> <a href="https://www.ugift529.com/" target="_blank" class="ugift-link">Ugift529.com</a> <span data-translate="gringotts_enter">and enter code:</span></p>
+                    <div class="vault-code-wrapper">
+                        <div class="vault-code" id="vault-code">B9M-57B</div>
+                        <button class="btn-copy" id="copy-code-btn" title="Copy Code">
+                            <i class="fa-regular fa-copy"></i> <span data-translate="copy_code">Copy</span>
+                        </button>
+                    </div>
                 </div>
             </section>
 
