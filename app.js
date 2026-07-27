@@ -259,6 +259,9 @@ const TRANSLATIONS = {
         hall_title: "Location",
         hall_loc: "2530 W Atlantic Ave",
         hall_details: "Waukegan, IL 60085",
+        attire_title: "Attire",
+        attire_text: "Costumes & Robes Welcome!",
+        attire_sub: "Come dressed in your favorite wizardry or festive outfit!",
         accio_calendar: "Accio Calendar",
         marauders_map: "Marauder's Map",
         gringotts_title: "Gringotts Education Vault",
@@ -293,6 +296,9 @@ const TRANSLATIONS = {
         hall_title: "Ubicación",
         hall_loc: "2530 W Atlantic Ave",
         hall_details: "Waukegan, IL 60085",
+        attire_title: "Vestimenta",
+        attire_text: "¡Disfraces y túnicas bienvenidos!",
+        attire_sub: "¡Ven con tu disfraz o atuendo mágico favorito!",
         accio_calendar: "Accio Calendario",
         marauders_map: "Mapa del Merodeador",
         gringotts_title: "Bóveda de Gringotts",
@@ -351,11 +357,11 @@ document.getElementById('calendar-btn').addEventListener('click', () => {
     const event = {
         title: currentLang === 'en' ? "Elena's Magical 1st Birthday Feast! ⚡" : "¡El Banquete Mágico de Elena! ⚡",
         description: currentLang === 'en' 
-            ? "We are pleased to inform you that you have been invited to celebrate a magical first year of life. Dust off your spellbooks and prepare your wands!"
-            : "Nos complace informarle que ha sido invitado a celebrar un año mágico de vida. ¡Despolve sus libros de hechizos y prepare sus varitas!",
+            ? "We are pleased to inform you that you have been invited to celebrate a magical first year of life. Costumes & robes welcome! Dust off your spellbooks and prepare your wands!"
+            : "Nos complace informarle que ha sido invitado a celebrar un año mágico de vida. ¡Disfraces y túnicas bienvenidos! ¡Despolve sus libros de hechizos y prepare sus varitas!",
         location: "2530 W Atlantic Ave, Waukegan, IL 60085",
-        startDate: "20261010T140000",
-        endDate: "20261010T170000"
+        startDate: "20261010T190000Z", // Saturday Oct 10, 2026 at 2:00 PM CDT (19:00 UTC)
+        endDate: "20261010T220000Z"   // Saturday Oct 10, 2026 at 5:00 PM CDT (22:00 UTC)
     };
 
     const icsContent = [
