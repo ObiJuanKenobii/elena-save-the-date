@@ -163,11 +163,18 @@ function animateConfetti() {
 // Magical Sound Synthesizer (Web Audio API)
 // ----------------------------------------------------
 let audioCtx = null;
-let isAudioPlaying = false;
+let isAudioPlaying = true; // On by default
 let audioLoopTimeout = null;
+let hasStartedAudio = false;
 
 const audioToggleBtn = document.getElementById('audio-toggle');
 const audioIcon = document.getElementById('audio-icon');
+
+// Visual state: On by default
+if (audioToggleBtn && audioIcon) {
+    audioToggleBtn.classList.add('playing');
+    audioIcon.className = 'fa-solid fa-volume-high';
+}
 
 // Whimsical HP-style celesta melody frequencies (Hz)
 const MELODY = [
@@ -216,8 +223,28 @@ function startMelodyLoop(noteIndex = 0) {
     audioLoopTimeout = setTimeout(() => startMelodyLoop(nextIndex), delay);
 }
 
+function initAudioOnUserInteraction() {
+    if (hasStartedAudio || !isAudioPlaying) return;
+    hasStartedAudio = true;
+
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+    startMelodyLoop(0);
+}
+
+// Start audio on first user gesture anywhere on page
+['click', 'touchstart', 'keydown'].forEach(evt => {
+    document.addEventListener(evt, initAudioOnUserInteraction, { once: true });
+});
+
 if (audioToggleBtn) {
-    audioToggleBtn.addEventListener('click', () => {
+    audioToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // prevent document listener loop
+
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         }
@@ -301,10 +328,10 @@ const TRANSLATIONS = {
         attire_sub: "¡Ven con el disfraz o atuendo divertido que prefieras!",
         accio_calendar: "Accio Calendario",
         marauders_map: "Mapa del Merodeador",
-        gringotts_title: "Bóveda de Gringotts",
-        gringotts_text: "Si desea honrar a Elena con un regalo para ayudarla a ahorrar para su futura educación (¡universidad/Hogwarts!), considere contribuir directamente a su fondo 529:",
-        gringotts_visit: "Visite",
-        gringotts_enter: "e ingrese el código:",
+        gringotts_title: "Bóveda Educativa de Gringotts",
+        gringotts_text: "Si deseas honrar a Elena con un regalo para ayudarla a ahorrar para su futura educación (¡universidad o Hogwarts!), puedes contribuir directamente a su fondo 529:",
+        gringotts_visit: "Visita",
+        gringotts_enter: "e ingresa el código:",
         copy_code: "Copiar",
         copied: "¡Copiado! 🪄",
         rsvp_title: "¿Asistirá al Banquete?",
