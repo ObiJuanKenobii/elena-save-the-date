@@ -359,20 +359,37 @@ document.getElementById('calendar-btn').addEventListener('click', () => {
         description: currentLang === 'en' 
             ? "We are pleased to inform you that you have been invited to celebrate a magical first year of life. Costumes welcome! Dust off your spellbooks and prepare your wands!"
             : "Nos complace informarle que ha sido invitado a celebrar un año mágico de vida. ¡Disfraces bienvenidos! ¡Despolve sus libros de hechizos y prepare sus varitas!",
-        location: "2530 W Atlantic Ave, Waukegan, IL 60085",
-        startDate: "20261010T190000Z", // Saturday Oct 10, 2026 at 2:00 PM CDT (19:00 UTC)
-        endDate: "20261010T220000Z"   // Saturday Oct 10, 2026 at 5:00 PM CDT (22:00 UTC)
+        location: "2530 W Atlantic Ave, Waukegan, IL 60085"
     };
 
     const icsContent = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
         "PRODID:-//Hogwarts Invitation//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "BEGIN:VTIMEZONE",
+        "TZID:America/Chicago",
+        "BEGIN:DAYLIGHT",
+        "TZOFFSETFROM:-0600",
+        "TZOFFSETTO:-0500",
+        "TZNAME:CDT",
+        "DTSTART:19700308T020000",
+        "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU",
+        "END:DAYLIGHT",
+        "BEGIN:STANDARD",
+        "TZOFFSETFROM:-0500",
+        "TZOFFSETTO:-0600",
+        "TZNAME:CST",
+        "DTSTART:19701101T020000",
+        "RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU",
+        "END:STANDARD",
+        "END:VTIMEZONE",
         "BEGIN:VEVENT",
         `UID:${Date.now()}@elenallagun.com`,
         `DTSTAMP:20260601T000000Z`,
-        `DTSTART:${event.startDate}`,
-        `DTEND:${event.endDate}`,
+        "DTSTART;TZID=America/Chicago:20261010T140000",
+        "DTEND;TZID=America/Chicago:20261010T170000",
         `SUMMARY:${event.title}`,
         `DESCRIPTION:${event.description}`,
         `LOCATION:${event.location}`,
